@@ -4,6 +4,11 @@
 // output: ['is', 'a', 'split', 'sentence.', 'This']
 
 function rearranger(arr) {
+    // console.log(arr)
+    let move = arr.shift()
+    // console.log(move)
+    arr.push(move)
+    return arr
 }
 
 
@@ -16,6 +21,21 @@ function rearranger(arr) {
 // output: 42
 
 function largestNum(arr) {
+    let largeNum = Math.max(...arr)
+    console.log(arr)
+    let duplicates = (arr.filter(function (num) {
+        return num == largeNum;
+    })).length;
+    console.log(duplicates)
+    if (duplicates == 1) {
+        return largeNum
+    } else {
+        let obj = {}
+        obj[largeNum] = duplicates
+        // obj.largestNum = duplicates
+        console.log(obj)
+        return obj
+    }
 }
 
 
@@ -28,6 +48,11 @@ function largestNum(arr) {
 // output: [16, 8, 4, 28]
 
 function elemsTimesLength(arr) {
+    for (var i = 0; i < arr.length; i++) {
+        // console.log(arr[i])
+        arr[i] = arr[i] * arr.length
+    }
+    return arr
 }
 
 
@@ -62,8 +87,18 @@ let flights = [{
 
 
 function flightCost(destination, firstClass) {
-    //***hint: use the find method***
-
+    // console.log(destination, firstClass)
+    let flight = flights.find(function (trip) {
+        if (trip.to == destination.toUpperCase()) {
+            return true
+        }
+    })
+    if (firstClass) {
+        return flight.prices.firstClass
+    } else {
+        // console.log(trip.prices.standard)
+        return flight.prices.standard
+    }
 }
 
 
@@ -84,6 +119,15 @@ let staff = [{ id: 1, name: 'Jon' }, { id: 2, name: 'Yuli' }, { id: 21, name: 'P
 { id: 881, name: 'Paul' }, { id: 0, name: 'Jon' }, { id: 999, name: 'Timma' }]
 
 function findById(id) {
+    let member = staff.find(function (employee) {
+        if (employee.id == id) {
+            return true
+        }
+    })
+    if (!member) {
+        return { error: "No user with that id." }
+    }
+    return member;
 
 }
 
@@ -111,4 +155,14 @@ let theBand = {
 }
 
 function bandMemberDetails(name) {
+    // console.log(name)
+    let member = theBand.members.find(function (n) {
+        // if (n.name == name) {
+        //     return true;
+        // } else {
+
+        // }
+        return n.name.includes(name, 0)
+    })
+    return `${member.name} is in the band and plays the ${member.instrument}`
 }
